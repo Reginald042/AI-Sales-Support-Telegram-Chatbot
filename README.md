@@ -36,30 +36,40 @@ If the customer decides to purchase, the chatbot collects the required informati
 
 ## Workflow
 
-1. Customer sends a message through Telegram.
+1. A customer sends a message to the Telegram chatbot.
 
-2. Telegram Trigger starts the workflow.
+2. The Telegram Trigger starts the workflow.
 
-3. The AI Agent determines the customer's intent.
+3. The AI Agent analyzes the customer's intent.
 
-4. The AI queries one of the following tools:
-   - Product Tool (Supabase SQL)
-   - FAQ Tool (Supabase SQL)
-   - Order Tool (Google Sheets)
+4. Based on the intent, the AI uses one or more of the following tools:
+   - **Product Tool (Supabase SQL)** to retrieve product information such as price, availability, brand, and specifications.
+   - **FAQ Tool (Supabase SQL)** to answer support questions such as delivery time, return policy, and other FAQs.
 
-5. The IF node evaluates the AI Agent's output.
+5. If the customer is only making an enquiry, the AI responds directly on Telegram, and the workflow ends.
 
-6. If the request is an enquiry:
-   - The workflow follows the **False** branch.
-   - The chatbot replies directly to the customer on Telegram.
+6. If the customer wants to place an order, the AI naturally collects the required order details, including:
+   - Customer Name
+   - Phone Number
+   - Email Address
+   - Delivery Address
+   - Product
+   - Quantity
 
-7. If the request is an order:
-   - The workflow follows the **True** branch.
-   - Retrieves the newly created order from Google Sheets.
-   - Maps the order details.
-   - Sends a Gmail notification to the sales team.
-   - Sends an order confirmation to the customer on Telegram.
-   
+7. Once all required information has been collected, the AI calls the **Order Tool**, which creates a new order and appends it to the Orders Google Sheet.
+
+8. The **IF Node** checks the AI Agent's output to determine whether an order was successfully created.
+
+9. If an order was created (**True** branch):
+   - The **Get Rows in Sheet** node retrieves the newly created order details.
+   - The **Edit Fields** node maps and formats the order information.
+   - The **Gmail** node sends a structured order notification to the sales team for immediate follow-up.
+   - The **Telegram** node sends an order confirmation message back to the customer.
+
+10. If no order was created (**False** branch):
+    - The workflow skips the sales notification process.
+    - The AI's response is sent directly to the customer on Telegram.
+  
 ## Tech Stack
 
 n8n
