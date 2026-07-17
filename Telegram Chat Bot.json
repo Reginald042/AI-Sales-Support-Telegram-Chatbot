@@ -1,0 +1,568 @@
+{
+  "name": "Telegram Chat Bot",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -96,
+        -16
+      ],
+      "id": "3926760f-3944-4791-9a13-d275c3a9bab2",
+      "name": "Telegram Trigger",
+      "webhookId": "6304e608-ba5f-4360-ae73-9bf1e803fa5b",
+      "credentials": {
+        "telegramApi": {
+          "id": "MmSuynYkBkeHT83N",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.message.text }}",
+        "options": {
+          "systemMessage": "You are a helpfYou are a helpful AI sales and support assistant.\nYour primary responsibility is to answer customer questions accurately by using the available tools.\n\nAlways use the  Product Tool for questions about products, prices, specifications, stock, colors, brands, and availability.\n\nAlways use the Faq Tool for questions about shipping, delivery, returns, refunds, warranty, payment methods, and store policies.\n\nIf a question requires information from both tools, use both before answering.\n\nAfter answering customers questions about Sales or any product, Ask if they want to place an order now. If No, give a profession response but  If Yes, you must ask for their details for order placing. Details must include: Full name, Phone number, Email, Address and Product and Quantity\n\nCreate a Row in the Order tool with their details.\nLook up the Product Id in the product Tool when creating an Ordrer.\nAfter the order has been created successfully, confirm the order details to the customer and inform them that their order has been received and is being processed.\n\nUse memory to afford duplicate or repeating questions you already know\n\nDo not name any tools or mention processes you are performing.\n\nKeep answers straightforward Provide concise, accurate, and friendly responses.ul assistant"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        144,
+        -16
+      ],
+      "id": "cc624d50-fb6d-46cc-afc6-31d79089f6be",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "13MLpjXQ-7146mqYlB24p2BLIDhP2UcSjqImm9E7d_0g",
+          "mode": "list",
+          "cachedResultName": "Orders",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/13MLpjXQ-7146mqYlB24p2BLIDhP2UcSjqImm9E7d_0g/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/13MLpjXQ-7146mqYlB24p2BLIDhP2UcSjqImm9E7d_0g/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Customer phone number": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Customer_phone_number', ``, 'string') }}",
+            "Order ID": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Order_ID', ``, 'string') }}",
+            "Product ID": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Product_ID', ``, 'string') }}",
+            "Quantity": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Quantity', ``, 'string') }}",
+            "Status": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Status', ``, 'string') }}",
+            "Order Date": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Order_Date', ``, 'string') }}",
+            "Total (USD)": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Total__USD_', ``, 'string') }}",
+            "Product": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Product', ``, 'string') }}",
+            "Address": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Address', ``, 'string') }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Customer phone number",
+              "displayName": "Customer phone number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Order ID",
+              "displayName": "Order ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Product ID",
+              "displayName": "Product ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Quantity",
+              "displayName": "Quantity",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Order Date",
+              "displayName": "Order Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Total (USD)",
+              "displayName": "Total (USD)",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Product",
+              "displayName": "Product",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Address",
+              "displayName": "Address",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        416,
+        208
+      ],
+      "id": "92baf45b-6806-45df-a1f1-130df975a2bd",
+      "name": "Order ",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "t8YBDXpUYnBnXbs2",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "product",
+        "limit": 5
+      },
+      "type": "n8n-nodes-base.supabaseTool",
+      "typeVersion": 1,
+      "position": [
+        320,
+        208
+      ],
+      "id": "5731340a-32f4-45b0-9b27-58f5a3bfd223",
+      "name": "Product",
+      "credentials": {
+        "supabaseApi": {
+          "id": "J5ZVQCxmrmvvl5mj",
+          "name": "Unnamed credential"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "faq",
+        "limit": 5
+      },
+      "type": "n8n-nodes-base.supabaseTool",
+      "typeVersion": 1,
+      "position": [
+        224,
+        208
+      ],
+      "id": "9f3d6a81-7190-4830-a6a8-f566fc905a92",
+      "name": "Faq",
+      "credentials": {
+        "supabaseApi": {
+          "id": "J5ZVQCxmrmvvl5mj",
+          "name": "Unnamed credential"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "llama-3.3-70b-versatile",
+        "options": {
+          "temperature": 0.7
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        -16,
+        208
+      ],
+      "id": "5d891027-3616-488b-929e-5b1f9086d35d",
+      "name": "Groq Chat Model",
+      "credentials": {
+        "groqApi": {
+          "id": "7hpksnQQIjWiQrms",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "13MLpjXQ-7146mqYlB24p2BLIDhP2UcSjqImm9E7d_0g",
+          "mode": "list",
+          "cachedResultName": "Orders",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/13MLpjXQ-7146mqYlB24p2BLIDhP2UcSjqImm9E7d_0g/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/13MLpjXQ-7146mqYlB24p2BLIDhP2UcSjqImm9E7d_0g/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": []
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        688,
+        -32
+      ],
+      "id": "7b5307a0-7655-4363-a840-e0d76f1dc928",
+      "name": "Get row(s) in sheet",
+      "alwaysOutputData": false,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "t8YBDXpUYnBnXbs2",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "adolfsreggy@gmail.com",
+        "subject": "New Order",
+        "emailType": "text",
+        "message": "=Order ID:{{ $json[\"Order ID:\"] }}\nPhone number:{{ $json[\"Customer phone number\"] }}\nProduct:{{ $json.Product }}\nQuantity:{{ $json.Quantity }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1136,
+        -32
+      ],
+      "id": "aa996e9e-6902-4b19-8994-67718adebeb2",
+      "name": "Send a message",
+      "webhookId": "38352cb4-39bf-4916-938d-f0c07a8d6923",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "PlpoKpuXrIdsoqnN",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "={{ $('AI Agent').item.json.output }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1296,
+        0
+      ],
+      "id": "93867591-349c-4233-8254-a8fa29794d3b",
+      "name": "Send a text message",
+      "webhookId": "84a1d7c0-752d-44d1-b9e7-6374201b8521",
+      "credentials": {
+        "telegramApi": {
+          "id": "MmSuynYkBkeHT83N",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "bd481cca-5ca2-4c12-88e6-f603ec8de158",
+              "leftValue": "={{ $json.output }}",
+              "rightValue": "Order ID",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        496,
+        -16
+      ],
+      "id": "5558478b-c874-4fd9-b9d0-63fba5f2cb81",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Telegram Trigger').item.json.message.chat.id }}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.4,
+      "position": [
+        128,
+        224
+      ],
+      "id": "85ab68e5-1a24-4770-951e-cdb632177e81",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ed0a3d3a-2c35-4b63-8ff3-fdcd97ba40a2",
+              "name": "Order ID:",
+              "value": "={{ $json[\"Order ID\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "43cde233-37e1-49b2-9706-9f6b2deea629",
+              "name": "Customer phone number",
+              "value": "={{ $json[\"Customer phone number\"] }}",
+              "type": "number"
+            },
+            {
+              "id": "9b4fb62e-3872-4f5a-9cfe-92ae9b742af5",
+              "name": "Product",
+              "value": "={{ $json.Product }}",
+              "type": "string"
+            },
+            {
+              "id": "da7dd490-6c19-4cd7-8c50-4674a0515f9c",
+              "name": "Quantity",
+              "value": "={{ $json.Quantity }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        896,
+        -32
+      ],
+      "id": "66a229b6-6e0b-4b4b-8527-af308ff330db",
+      "name": "Edit Fields"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Order ": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Product": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Faq": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "d91c9409-1369-410d-83d5-f9a4f0d03cc3",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "c8d0dd1717817c88eebd0f5f376f7d53530fd87b81645383936dc72624dd5f37"
+  },
+  "nodeGroups": [],
+  "id": "gxIaR4vG8AkjUaco",
+  "tags": []
+}
