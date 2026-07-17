@@ -23,24 +23,31 @@ If the customer decides to purchase, the chatbot collects the required informati
 🔀 Intelligent routing with n8n AI Agent and IF nodes
 
 ## Workflow
-1.Customer sends a message through Telegram.
-2.Telegram Trigger starts the workflow.
-3.AI Agent determines the customer's intent.
-4.The AI queries either:
- -Product Tool (Supabase SQL)
- -FAQ Tool (Supabase SQL)
- -Order Tool (Google Sheets) when an order is confirmed.
-5.IF Node evaluates the AI Agent's output.
-6.If the request is an enquiry:
- -The workflow follows the False branch.
- -The chatbot replies directly to the customer on Telegram.
-7.If the request is an order:
- -The workflow follows the True branch.
- -Retrieves the newly created order from Google Sheets.
- -Maps the order details.
- -Sends a Gmail notification to the sales team.
- -Sends an order confirmation to the customer on Telegram.
- 
+
+1. Customer sends a message through Telegram.
+
+2. Telegram Trigger starts the workflow.
+
+3. The AI Agent determines the customer's intent.
+
+4. The AI queries one of the following tools:
+   - Product Tool (Supabase SQL)
+   - FAQ Tool (Supabase SQL)
+   - Order Tool (Google Sheets)
+
+5. The IF node evaluates the AI Agent's output.
+
+6. If the request is an enquiry:
+   - The workflow follows the **False** branch.
+   - The chatbot replies directly to the customer on Telegram.
+
+7. If the request is an order:
+   - The workflow follows the **True** branch.
+   - Retrieves the newly created order from Google Sheets.
+   - Maps the order details.
+   - Sends a Gmail notification to the sales team.
+   - Sends an order confirmation to the customer on Telegram.
+   
 ## Tech Stack
 n8n
 Groqchat model
