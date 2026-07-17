@@ -4,22 +4,34 @@ Instead of relying on static chatbot flows, the AI Agent understands customer in
 
 ## Overview
 This project demonstrates how AI Agents can automate sales and customer support workflows for businesses.
+
 When a customer sends a message through Telegram, the AI determines whether the customer needs:
-Product information
-Customer support
+-Product information
+-Customer support
+
 To place an order
 The AI then calls the appropriate tool to complete the request before responding naturally.
+
 If the customer decides to purchase, the chatbot collects the required information, creates the order automatically, and notifies the sales team via Gmail.
 
 ## Features
+
 🤖 AI-powered Sales & Support Assistant
+
 🛒 Product search using Supabase SQL
+
 ❓ FAQ retrieval using Supabase SQL
+
 🧠 Conversation memory for contextual responses
+
 📦 Automated order creation
+
 📊 Order logging in Google Sheets
+
 📧 Automatic Gmail notifications for the sales team
+
 💬 Instant Telegram replies
+
 🔀 Intelligent routing with n8n AI Agent and IF nodes
 
 ## Workflow
@@ -49,27 +61,45 @@ If the customer decides to purchase, the chatbot collects the required informati
    - Sends an order confirmation to the customer on Telegram.
    
 ## Tech Stack
+
 n8n
+
 Groqchat model
+
 Telegram Bot API
+
 Supabase SQL
+
 Google Sheets
+
 Gmail
+
 Simple Memory
 
 ## Skills Demonstrated
+
 AI Agents
+
 Workflow Automation
+
 Prompt Engineering
+
 Tool Calling
+
 SQL Database Integration
+
 API Integration
+
 Business Process Automation
+
 n8n
 Supabase
+
 Groq
+
 Telegram Bot Development
 
 ## License
+
 MIT License
 
