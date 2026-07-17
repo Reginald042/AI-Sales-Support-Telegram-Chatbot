@@ -43,7 +43,7 @@ If the customer decides to purchase, the chatbot collects the required informati
  
 ## Tech Stack
 n8n
-Groq chat model
+Groqchat model
 Telegram Bot API
 Supabase SQL
 Google Sheets
