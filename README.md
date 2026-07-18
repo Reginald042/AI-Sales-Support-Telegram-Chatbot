@@ -6,10 +6,13 @@ Instead of relying on static chatbot flows, the AI Agent understands customer in
 This project demonstrates how AI Agents can automate sales and customer support workflows for businesses.
 
 When a customer sends a message through Telegram, the AI determines whether the customer needs:
+
 -Product information
+
 -Customer support
 
 To place an order
+
 The AI then calls the appropriate tool to complete the request before responding naturally.
 
 If the customer decides to purchase, the chatbot collects the required information, creates the order automatically, and notifies the sales team via Gmail.
@@ -26,7 +29,7 @@ If the customer decides to purchase, the chatbot collects the required informati
 
 📦 Automated order creation
 
-📊 Order logging in Google Sheets
+📊 Order logging in supabase SQL
 
 📧 Automatic Gmail notifications for the sales team
 
@@ -56,12 +59,12 @@ If the customer decides to purchase, the chatbot collects the required informati
    - Product
    - Quantity
 
-7. Once all required information has been collected, the AI calls the **Order Tool**, which creates a new order and appends it to the Orders Google Sheet.
+7. Once all required information has been collected, the AI calls the **Order Tool**, which creates a new order and appends it to the Orders supabase SQL.
 
 8. The **IF Node** checks the AI Agent's output to determine whether an order was successfully created.
 
 9. If an order was created (**True** branch):
-   - The **Get Rows in Sheet** node retrieves the newly created order details.
+   - The **Get Many Rows ** node retrieves the newly created order details.
    - The **Edit Fields** node maps and formats the order information.
    - The **Gmail** node sends a structured order notification to the sales team for immediate follow-up.
    - The **Telegram** node sends an order confirmation message back to the customer.
@@ -80,7 +83,6 @@ Telegram Bot API
 
 Supabase SQL
 
-Google Sheets
 
 Gmail
 
